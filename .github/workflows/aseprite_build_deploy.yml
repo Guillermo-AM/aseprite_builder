@@ -71,6 +71,10 @@ jobs:
           curl -o Aseprite-source.zip -L ${{ needs.check-version.outputs.download_url }}
           unzip Aseprite-source.zip -d aseprite
           mkdir -p aseprite/build
+      - name: (Windows) Install libjpeg-turbo
+        if: matrix.os == 'windows-latest'
+        run: |
+          choco install libjpeg-turbo -y
       - name: (Windows) Run CMake
         if: matrix.os == 'windows-latest'
         working-directory: aseprite/build
